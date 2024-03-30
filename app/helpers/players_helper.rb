@@ -1,5 +1,19 @@
 module PlayersHelper
   def sort_link(column:, label:)
-    link_to label, players_path(column: column), data: { turbo_action: 'replace' }
+    direction = column == params[:column] ? next_direction : 'asc'
+    link_to label, players_path(column: column, direction: direction),
+      data: { turbo_action: 'replace' }
+  end
+
+  def next_direction
+    params[:direction] == 'asc' ? 'desc' : 'asc'
+  end
+
+  def show_sort_indicator_for(column)
+    sort_indicator if params[:column] == column
+  end
+
+  def sort_indicator
+    tag.span(class: "sort sort-#{params[:direction]}")
   end
 end
