@@ -3,8 +3,13 @@
 ### Turbo 8 Building a sortable table
 
 Building a sortable table with Turbo 8's page refreshes. Page refreshes make it easier than ever to build modern, SPA-like experiences with Turbo and Ruby on Rails.
-The application will allow users to sort a list of Players by their attributes. The players will be displayed in a table, and users will click on the table headers to apply their desired sort order
+The application will allow users to sort a list of Players by their attributes. The players will be displayed in a table, and users will click on the table headers to apply their desired sort order.
 https://www.colby.so/posts/turbo-8-refresh-sorting
+
+### Searching and filtering with Turbo 8
+
+Add searching and filtering to the sortable table.
+https://www.colby.so/posts/turbo-8-search-and-filter
 
 
 * Ruby version:\
@@ -45,3 +50,4 @@ Navigate to localhost:3000/
 
 [Building a sortable table with Turbo 8's page refreshes](https://www.colby.so/posts/turbo-8-refresh-sorting) by David Colby
 Github [repo](https://github.com/DavidColby/turbo-refreshhttps://github.com/DavidColby/turbo_8_refresh_sorting)
+[Searching and filtering with Turbo 8](https://www.colby.so/posts/turbo-8-search-and-filter) by David Colby
