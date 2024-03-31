@@ -5,10 +5,10 @@ class PlayersController < ApplicationController
   def index
     session['filters'] ||= {}
     session['filters'].merge!(filter_params)
-
+  
     @players = Player.includes(:team)
-    @players = @players.where("players.name LIKE ?", "%#{session['filters']['name']}%") if session['filters']['name'].present?
-    @players = @players.order(session['filters'].slice('column', 'direction').values.join(' '))
+                     .then { search_by_name _1 }
+                     .then { apply_order _1 }
   end
 
   # GET /players/1 or /players/1.json
@@ -75,5 +75,13 @@ class PlayersController < ApplicationController
 
     def filter_params
       params.permit(:name, :column, :direction)
+    end
+
+    def search_by_name(scope)
+      session['filters']['name'].present? ? scope.where('players.name like ?', "%#{session['filters']['name']}%") : scope
+    end
+
+    def apply_order(scope)
+      scope.order(session['filters'].slice('column', 'direction').values.join(' '))
     end
 end
