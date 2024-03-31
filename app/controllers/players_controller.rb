@@ -8,6 +8,7 @@ class PlayersController < ApplicationController
   
     @players = Player.includes(:team)
                      .then { search_by_name _1 }
+                     .then { filter_by_team _1 }
                      .then { apply_order _1 }
   end
 
@@ -74,7 +75,7 @@ class PlayersController < ApplicationController
     end
 
     def filter_params
-      params.permit(:name, :column, :direction)
+      params.permit(:name, :team_id, :column, :direction)
     end
 
     def search_by_name(scope)
@@ -83,5 +84,9 @@ class PlayersController < ApplicationController
 
     def apply_order(scope)
       scope.order(session['filters'].slice('column', 'direction').values.join(' '))
+    end
+
+    def filter_by_team(scope)
+      session['filters']['team_id'].present? ? scope.where(team_id: session['filters']['team_id']) : scope
     end
 end
